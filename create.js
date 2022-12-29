@@ -1,48 +1,33 @@
 // JSON Data
 
-const camas = [];
-let list;
+let camas = [];
 
-const camaOpciones = (list, camas) => {
-	if (list) {
-		camas.map((cama) => {
-			let li = `		
-			<li>
-			<a class="dropdown-item">
-			<div class="form-check">
-			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-			<label class="form-check-label" for="flexRadioDefault1">
-			${cama.nombre} $${cama.precio}
-			</label>
-			</div>
-			</a>
-			</li>
-			`;
-			let element = document.createElement('div');
-			element.innerHTML = li;
-			list.appendChild(element.firstChild);
-		});
-	} else {
-		console.error("list not found");
-	}
-};
-
-window.onload = () => {	
-	fetch('./datos.json')
+window.onload = async () => {	
+	await fetch('./datos.json')
 	.then(res => res.json())
 	.then(data => {
 		data.forEach((cama) => {
 			camas.push(cama);
 		})
+		console.log(camas);
 	})
 	.then(() => {
-		list = document.getElementById("seleccion-de-camas");
-		camaOpciones(list, camas);
+		camaOpciones(camas);
 	})
 	.catch(error => console.error(error));
 }
 
-console.log(list);
+
+const camaOpciones = (camas) => {
+	let opciones = camas.map((cama, index) =>
+	`<option value=${index}>${cama.nombre} ${cama.precio}</option>`
+	).join('');
+	
+	console.log(opciones);
+	document.querySelector("#seleccion-de-camas").innerHTML = opciones;
+};
+
+
 
 const guardarreserva = (clave, valor) => (localStorage.setItem(clave, valor))
 
@@ -53,12 +38,13 @@ agregar.addEventListener('click', () => {
 			nombre: document.querySelector('#nombre').value,
 			apellido: document.querySelector('#apellido').value,
 			mail: document.querySelector('#mail').value,
-			telefono: document.querySelector('#telefono').value
+			telefono: document.querySelector('#telefono').value,
+			cama: document.querySelector('#seleccion-de-camas').value
 		}
 	]
 	
 	
-	guardarreserva('cargaReserva', JSON.stringify(nuevareserva))
+	guardarreserva('reserva', JSON.stringify(nuevareserva))
 }
 )
 
