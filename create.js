@@ -19,24 +19,8 @@ window.onload = async () => {
 
 
 const camaOpciones = (camas) => {
-	let opciones = camas.map((cama) =>
-	`<li>
-	<a class="dropdown-item">
-
-	<div class="form-check">
-
-	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-
-	<label class="form-check-label" for="flexRadioDefault1"
-	value = ${cama.nombre} ${cama.precio}>
-	${cama.nombre} $${cama.precio}
-	</label>
-
-	</div>
-
-	</a>
-
-	</li>`
+	let opciones = camas.map((cama, index) =>
+	`<option value=${index}>${cama.nombre} ${cama.precio}</option>`
 	).join('');
 	
 	console.log(opciones);
@@ -54,7 +38,8 @@ agregar.addEventListener('click', () => {
 			nombre: document.querySelector('#nombre').value,
 			apellido: document.querySelector('#apellido').value,
 			mail: document.querySelector('#mail').value,
-			telefono: document.querySelector('#telefono').value
+			telefono: document.querySelector('#telefono').value,
+			cama: document.querySelector('#seleccion-de-camas').value
 		}
 	]
 	
