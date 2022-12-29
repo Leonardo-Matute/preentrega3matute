@@ -58,7 +58,7 @@ agregar.addEventListener('click', () => {
 	]
 	
 	
-	guardarreserva('cargaReserva', JSON.stringify(nuevareserva))
+	guardarreserva('reserva', JSON.stringify(nuevareserva))
 }
 )
 

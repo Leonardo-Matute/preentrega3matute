@@ -5,8 +5,7 @@ let mostrarreserva = (() => {
 
     let listadoreserva = JSON.parse(localStorage.getItem('reserva'))
 
-    for (let index = 0; index < listadoreserva
-    .length; index++) {
+    for (let index = 0; index < listadoreserva.length; index++) {
         let div = document.createElement('div')
         div.className = 'col s4'
         div.innerHTML = `
